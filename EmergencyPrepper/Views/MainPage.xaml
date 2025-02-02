@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmergencyPrepper.Views.MainPage">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="DarkSlateGray" Offset="0.0"/>
+            <GradientStop Color="Black" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+
+        <Label Text="Select an Emergency to Prepare For:"
+               TextColor="White"
+               FontSize="20"
+               HorizontalOptions="Center"/>
+
+        <!-- Emergency Picker -->
+        <Picker x:Name="EmergencyPicker"
+                Title="Choose an Emergency"
+                SelectedIndexChanged="OnEmergencySelected"
+                TextColor="White"
+                BackgroundColor="DimGray"
+                HorizontalOptions="Center">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Hurricane</x:String>
+                    <x:String>Wildfire</x:String>
+                    <x:String>Nuclear War</x:String>
+                    <x:String>Zombie Apocalypse</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <!-- Navigation Button -->
+        <Button Text="Prepare!"
+                TextColor="White"
+                BackgroundColor="Firebrick"
+                Clicked="OnPrepareClicked"
+                HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+</ContentPage>

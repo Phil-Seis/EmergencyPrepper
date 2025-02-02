@@ -1,0 +1,15 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmergencyPrepper.Views.SplashPage"
+             BackgroundColor="Black">
+
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <!-- Fading Image -->
+        <Image x:Name="RotatingImage" HeightRequest="400" WidthRequest="400" Opacity="0.5"/>
+
+        <Label Text="Please wait, loading something cool..."
+               TextColor="White"
+               FontSize="20"
+               HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
