@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿//Entry point of my program
+//Sets up app's services and dependencies as well as fonts and logging before the launch
+using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using Plugin.Maui.Audio;
 
 namespace EmergencyPrepper
 {
@@ -11,7 +12,8 @@ namespace EmergencyPrepper
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()                
+                .UseMauiCommunityToolkit()    
+                //configure the fonts for the app. I added a few extra custom fonts.
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -23,6 +25,7 @@ namespace EmergencyPrepper
                     fonts.AddFont("Infected.ttf", "Infected");
                 })
 
+                //I added this when I was fumbling around trying to get background audio to work. Not necessary right now but wanted to save for future.
                 .ConfigureMauiHandlers(handlers =>
                  {
                      handlers.AddHandler(typeof(Plugin.Maui.Audio.AudioManager), typeof(Plugin.Maui.Audio.AudioManager));

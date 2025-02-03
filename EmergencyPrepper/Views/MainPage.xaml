@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="EmergencyPrepper.Views.MainPage"
-             Title="Emergency Prepper Tool">    
+             Title="Emergency Prepper Tool by Philip Seisman">    
 
     <ContentPage.Background>
         <LinearGradientBrush>
@@ -35,7 +35,7 @@
            Grid.Row="1" Grid.Column="0"
            HorizontalOptions="Center"/>
 
-        <!-- Move the Divider to the Left of "Badges Earned" -->
+        <!-- Divider to the Left of "Badges Earned" -->
         <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
              WidthRequest="2"
              Color="White"
@@ -50,7 +50,7 @@
             <!-- Spacing between Label and Button -->
             <BoxView HeightRequest="20" Color="Transparent"/>
 
-            <!-- Badges will be added dynamically here -->
+            <!-- Badges dynamically added here -->
             <HorizontalStackLayout x:Name="BadgesContainer" Spacing="10">
             </HorizontalStackLayout>
         </VerticalStackLayout>

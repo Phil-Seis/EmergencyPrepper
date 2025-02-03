@@ -6,8 +6,8 @@ namespace EmergencyPrepper.Views;
 public partial class MainPage : ContentPage
 {
     private string _selectedEmergency;
-    public ObservableCollection<string> EmergencyList { get; set; }
-    public ObservableCollection<string> EarnedBadges { get; set; }
+    public ObservableCollection<string> EmergencyList { get; set; }//List of emergency names
+    public ObservableCollection<string> EarnedBadges { get; set; } //List of earned badges
 
     public MainPage()
     {
@@ -22,14 +22,15 @@ public partial class MainPage : ContentPage
             "Zombie Apocalypse"
         };
 
-        // Set Picker items manually
+        //Set Picker items
         EmergencyPicker.ItemsSource = EmergencyList;
 
-        // Initialize Earned Badges List
+        //Initialize Earned Badges List
         EarnedBadges = new ObservableCollection<string>();
 
+        //Bind UI elements in XAML to this code-behind
         BindingContext = this;
-    }    
+    }
 
     protected override void OnAppearing()
     {
@@ -37,6 +38,7 @@ public partial class MainPage : ContentPage
         RefreshBadges(); //Ensure badges load when returning to MainPage
     }
 
+    //method to add badges
     public void AddBadge(string badgeImage)
     {
         if (!EarnedBadges.Contains(badgeImage))
@@ -64,6 +66,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    //Event handler for when an emergency is selected
     private void OnEmergencySelected(object sender, EventArgs e)
     {
         if (EmergencyPicker.SelectedIndex != -1)
@@ -72,6 +75,7 @@ public partial class MainPage : ContentPage
         }
     }
 
+    //Event handler for when the Prepare button is clicked
     private async void OnPrepareClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(_selectedEmergency))

@@ -21,7 +21,7 @@ public partial class GoBagPage : ContentPage
         ChecklistItems = new ObservableCollection<ChecklistItem>();
         HamFrequencies = new ObservableCollection<string>();
 
-        // Ensure BackgroundImage exists before setting it
+        //Ensure BackgroundImage exists before setting it
         if (this.FindByName<Image>("BackgroundImage") is Image backgroundImage)
         {
             backgroundImage.Source = emergencyType switch
@@ -34,7 +34,7 @@ public partial class GoBagPage : ContentPage
             };
         }
 
-        // Load checklist based on emergency type
+        //Load checklist based on emergency type
         if (emergencyType == "Nuclear War")
         {
             LoadNuclearWarChecklist();
@@ -58,7 +58,7 @@ public partial class GoBagPage : ContentPage
 
     private async void OnHamInfoClicked(object sender, EventArgs e)
     {
-        Uri hamRadioUrl = new Uri("https://strykerradios.com/ham-radios/ham-radio-frequencies-common-uses-you-should-know/"); // Link to HAM radio info
+        Uri hamRadioUrl = new Uri("https://strykerradios.com/ham-radios/ham-radio-frequencies-common-uses-you-should-know/"); //Link to HAM radio info
         await Launcher.OpenAsync(hamRadioUrl);
     }
 
@@ -155,10 +155,10 @@ public partial class GoBagPage : ContentPage
         {
             await DisplayAlert("Checklist Complete!", "You have fully prepared for this disaster!", "OK");
 
-            // Award the badge before returning to MainPage
+            //Award the badge before returning to MainPage
             AwardBadge(emergencyType);
 
-            // Navigate back to MainPage
+            //Navigate back to MainPage
             await Navigation.PopAsync();
         }
         else
@@ -167,20 +167,31 @@ public partial class GoBagPage : ContentPage
         }
     }
 
+    //switch statement for badges awarded
     private void AwardBadge(string emergencyType)
     {
-        string badgeImage = emergencyType switch
+        string badgeImage = null;
+
+        switch (emergencyType)
         {
-            "Hurricane" => "hurricanebadge.png",
-            "Wildfire" => "wildfirebadge.png",
-            "Nuclear War" => "nuclearbadge.png",
-            "Zombie Apocalypse" => "zombiebadge.png",
-            _ => null
-        };
+            case "Hurricane":
+                badgeImage = "hurricanebadge.png";
+                break;
+            case "Wildfire":
+                badgeImage = "wildfirebadge.png";
+                break;
+            case "Nuclear War":
+                badgeImage = "nuclearbadge.png";
+                break;
+            case "Zombie Apocalypse":
+                badgeImage = "zombiebadge.png";
+                break;
+        }
 
         if (badgeImage != null)
         {
             _mainPage.AddBadge(badgeImage);
         }
     }
+
 }
