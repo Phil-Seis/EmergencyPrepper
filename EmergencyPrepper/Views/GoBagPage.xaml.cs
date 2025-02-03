@@ -24,14 +24,27 @@ public partial class GoBagPage : ContentPage
         //Ensure BackgroundImage exists before setting it
         if (this.FindByName<Image>("BackgroundImage") is Image backgroundImage)
         {
-            backgroundImage.Source = emergencyType switch
+            string backgroundSource;
+
+            switch (emergencyType)
             {
-                "Hurricane" => "hurricane.png",
-                "Wildfire" => "wildfire.png",
-                "Nuclear War" => "nuclear.png",
-                "Zombie Apocalypse" => "apocalypse.png",
-                _ => "default.png"
-            };
+                case "Hurricane":
+                    backgroundSource = "hurricane.png";
+                    break;
+                case "Wildfire":
+                    backgroundSource = "wildfire.png";
+                    break;
+                case "Nuclear War":
+                    backgroundSource = "nuclear.png";
+                    break;
+                case "Zombie Apocalypse":
+                    backgroundSource = "apocalypse.png";
+                    break;
+                default:
+                    backgroundSource = "default.png";
+                    break;
+            }
+            backgroundImage.Source = backgroundSource;
         }
 
         //Load checklist based on emergency type
@@ -58,7 +71,7 @@ public partial class GoBagPage : ContentPage
 
     private async void OnHamInfoClicked(object sender, EventArgs e)
     {
-        Uri hamRadioUrl = new Uri("https://strykerradios.com/ham-radios/ham-radio-frequencies-common-uses-you-should-know/"); //Link to HAM radio info
+        Uri hamRadioUrl = new Uri("https://strykerradios.com/ham-radios/ham-radio-frequencies-common-uses-you-should-know/"); //Link to HAM radio info. Random site I chose.
         await Launcher.OpenAsync(hamRadioUrl);
     }
 

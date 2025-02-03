@@ -15,6 +15,7 @@ public partial class SplashPage : ContentPage
         InitializeComponent();        
     }
 
+    //Override method for when page loads, the animation starts and begins countdown to transition to MainPage
     protected override void OnAppearing()
     {
         base.OnAppearing();

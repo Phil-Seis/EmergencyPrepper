@@ -84,7 +84,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        // Navigate to GoBagPage and pass the selected emergency
+        //Navigate to GoBagPage and pass the selected emergency
         await Navigation.PushAsync(new GoBagPage(_selectedEmergency, this));
     }
 }
