@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmergencyPrepper.Views.MainPage">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="EmergencyPrepper.Views.MainPage"
+             Title="Emergency Prepper Tool">    
 
     <ContentPage.Background>
         <LinearGradientBrush>
@@ -10,36 +12,71 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+    <Grid Padding="80" RowDefinitions="Auto, Auto, Auto, *" ColumnDefinitions="1.5*, 0.1*, 0.8*">
 
-        <Label Text="Select an Emergency to Prepare For:"
-               TextColor="White"
-               FontSize="20"
-               HorizontalOptions="Center"/>
+        <!-- Main Title -->
+        <Label Text="EMERGENCY PREPPER"
+           TextColor="GreenYellow"
+           FontFamily="Colleged"
+           FontSize="50"
+           FontAttributes="Bold"
+           Grid.Row="0" Grid.Column="0"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"/>
+
+        <!-- Space between labels-->
+        <BoxView HeightRequest="40" Color="Transparent" Grid.Row="1" Grid.Column="0"/>
+
+        <!-- Subtitle -->
+        <Label Text="CHOOSE YOUR EMERGENCY:"
+           TextColor="White"
+           FontFamily="OpenSansRegular"
+           FontSize="20"
+           Grid.Row="1" Grid.Column="0"
+           HorizontalOptions="Center"/>
+
+        <!-- Move the Divider to the Left of "Badges Earned" -->
+        <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
+             WidthRequest="2"
+             Color="White"
+             Opacity="0.5"
+             VerticalOptions="FillAndExpand"
+             HorizontalOptions="Center"/>
+
+        <!-- Earned Badges Section (Right Side) -->
+        <VerticalStackLayout Grid.Row="0" Grid.Column="2" Padding="10">
+            <Label Text="Badges Collected:" TextColor="GreenYellow" FontSize="40" FontAttributes="Bold" FontFamily="Infected" HorizontalOptions="Center"/>
+
+            <!-- Spacing between Label and Button -->
+            <BoxView HeightRequest="20" Color="Transparent"/>
+
+            <!-- Badges will be added dynamically here -->
+            <HorizontalStackLayout x:Name="BadgesContainer" Spacing="10">
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
 
         <!-- Emergency Picker -->
-        <Picker x:Name="EmergencyPicker"
-                Title="Choose an Emergency"
+        <VerticalStackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
+            <Picker x:Name="EmergencyPicker"
                 SelectedIndexChanged="OnEmergencySelected"
                 TextColor="White"
                 BackgroundColor="DimGray"
-                HorizontalOptions="Center">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Hurricane</x:String>
-                    <x:String>Wildfire</x:String>
-                    <x:String>Nuclear War</x:String>
-                    <x:String>Zombie Apocalypse</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+                HeightRequest="20"
+                WidthRequest="250"/>
 
-        <!-- Navigation Button -->
-        <Button Text="Prepare!"
+            <!-- Spacing between Picker and Button -->
+            <BoxView HeightRequest="10" Color="Transparent"/>
+
+            <!-- Prepare Button -->
+            <Button Text="Prepare!"
                 TextColor="White"
+                FontFamily="OpenSans-Regular"
                 BackgroundColor="Firebrick"
                 Clicked="OnPrepareClicked"
+                WidthRequest="100"
+                HeightRequest="30"
                 HorizontalOptions="Center"/>
+        </VerticalStackLayout>
 
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

@@ -1,4 +1,5 @@
 ﻿using EmergencyPrepper.Views;
+using Plugin.Maui.Audio;
 
 namespace EmergencyPrepper
 {
@@ -6,9 +7,9 @@ namespace EmergencyPrepper
     {
         public App()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
-            // Ensure the app starts with a NavigationPage
+            //Start with the splash screen
             MainPage = new NavigationPage(new SplashPage());
         }
     }

@@ -11,7 +11,7 @@ public partial class SplashPage : ContentPage
 
     public SplashPage()
     {
-        InitializeComponent();
+        InitializeComponent();        
     }
 
     protected override void OnAppearing()
@@ -48,7 +48,7 @@ public partial class SplashPage : ContentPage
         await Task.Delay(8000); // Wait for 8 seconds
         _isAnimating = false; // Stop animation
 
-        // Ensure navigation works
+        // Navigate to MainPage
         Application.Current.MainPage = new NavigationPage(new MainPage());
     }
 }

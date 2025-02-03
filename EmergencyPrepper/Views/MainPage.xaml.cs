@@ -1,18 +1,69 @@
 ﻿using Microsoft.Maui.Controls;
-using System;
+using System.Collections.ObjectModel;
 
 namespace EmergencyPrepper.Views;
 
 public partial class MainPage : ContentPage
 {
     private string _selectedEmergency;
+    public ObservableCollection<string> EmergencyList { get; set; }
+    public ObservableCollection<string> EarnedBadges { get; set; }
 
     public MainPage()
     {
-        InitializeComponent();
+        InitializeComponent();        
+        
+        // Initialize the emergency options
+        EmergencyList = new ObservableCollection<string>
+        {
+            "Hurricane",
+            "Wildfire",
+            "Nuclear War",
+            "Zombie Apocalypse"
+        };
+
+        // Set Picker items manually
+        EmergencyPicker.ItemsSource = EmergencyList;
+
+        // Initialize Earned Badges List
+        EarnedBadges = new ObservableCollection<string>();
+
+        BindingContext = this;
+    }    
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        RefreshBadges(); //Ensure badges load when returning to MainPage
     }
 
-    // Handle Picker Selection
+    public void AddBadge(string badgeImage)
+    {
+        if (!EarnedBadges.Contains(badgeImage))
+        {
+            EarnedBadges.Add(badgeImage);
+            RefreshBadges(); //Refresh the badge container
+        }
+    }
+
+    private void RefreshBadges()
+    {
+        if (BadgesContainer == null) return; //Avoid errors if BadgesContainer is missing
+
+        // Clear old badges
+        BadgesContainer.Children.Clear();
+
+        foreach (var badge in EarnedBadges)
+        {
+            BadgesContainer.Children.Add(new Image
+            {
+                Source = badge,
+                WidthRequest = 80,
+                HeightRequest = 80
+            });
+        }
+    }
+
     private void OnEmergencySelected(object sender, EventArgs e)
     {
         if (EmergencyPicker.SelectedIndex != -1)
@@ -21,7 +72,6 @@ public partial class MainPage : ContentPage
         }
     }
 
-    // Handle Button Click
     private async void OnPrepareClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(_selectedEmergency))
@@ -30,7 +80,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        // Ensure Navigation works
-        await Navigation.PushAsync(new GoBagPage(_selectedEmergency));
+        // Navigate to GoBagPage and pass the selected emergency
+        await Navigation.PushAsync(new GoBagPage(_selectedEmergency, this));
     }
 }

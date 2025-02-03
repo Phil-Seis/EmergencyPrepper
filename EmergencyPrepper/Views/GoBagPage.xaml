@@ -1,15 +1,91 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmergencyPrepper.Views.GoBagPage">
 
-    <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+    <Grid ColumnDefinitions="2*, 1*">
+        <!-- Left for Checklist (2 Parts), Right for HAM (1 Part) -->
 
-        <Label x:Name="EmergencyLabel"
-               Text="Preparing for: "
-               TextColor="White"
-               FontSize="24"
-               HorizontalOptions="Center"/>
+        <!-- Background Image -->
+        <Image x:Name="BackgroundImage"
+               Aspect="AspectFill"
+               Opacity="0.5"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               Grid.ColumnSpan="2"/>
 
-    </VerticalStackLayout>
+        <!-- Left Column: Checklist -->
+        <VerticalStackLayout Padding="20" VerticalOptions="Center" Grid.Column="0">
+
+            <Label x:Name="EmergencyLabel"
+                   Text="Preparing for: "
+                   FontFamily="Darkmode"
+                   TextColor="Black"
+                   FontSize="48"
+                   HorizontalOptions="Center"/>
+
+            <!-- Checklist -->
+            <CollectionView ItemsSource="{Binding ChecklistItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Spacing="10">
+                            <CheckBox IsChecked="{Binding IsChecked}"/>
+                            <Label Text="{Binding Name}" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Complete Checklist Button -->
+            <Button Text="Complete Checklist"
+                    BackgroundColor="#8F1616"
+                    TextColor="White"
+                    Command="{Binding CompleteChecklistCommand}"
+                    HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Right Column: HAM Radio Section -->
+        <VerticalStackLayout Padding="20" VerticalOptions="Center" Grid.Column="1">
+
+            <Label Text="***HAM RADIO OPERATORS***"
+                   TextColor="DarkRed"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+           
+            <!-- HAM Radio Toggle -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Are you a licensed HAM operator?" TextColor="DarkRed" FontSize="14"/>
+                <Switch Toggled="OnHamRadioToggled"/>
+            </HorizontalStackLayout>
+
+            <!-- HAM Radio Frequencies List -->
+            <ListView x:Name="HamRadioFrequencies"
+                      ItemsSource="{Binding HamFrequencies}"
+                      IsVisible="False"
+                      BackgroundColor="LightGray"
+                      HeightRequest="150">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}" TextColor="Black" FontSize="16"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- HAM Radio Information Link -->
+            <Label Text="Click here for more information"
+                   TextColor="Blue"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Padding="5">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnHamInfoClicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+
+    </Grid>
 </ContentPage>

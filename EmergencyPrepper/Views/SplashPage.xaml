@@ -4,12 +4,23 @@
              BackgroundColor="Black">
 
     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <!-- Fading Image -->
-        <Image x:Name="RotatingImage" HeightRequest="400" WidthRequest="400" Opacity="0.5"/>
 
-        <Label Text="Please wait, loading something cool..."
+        <Label Text="Emergency Prepper Tool"
+                TextColor="GreenYellow"
+                FontSize="50"
+                FontFamily="DoctorGlitch"
+                HorizontalOptions="Center"/>
+        <!-- Fading Image -->
+        <Image x:Name="RotatingImage" HeightRequest="300" WidthRequest="300" Opacity="0.5"/>
+
+        <!-- Spacer for extra space -->
+        <BoxView HeightRequest="20" Color="Transparent"/>
+        
+        <!-- Loading Text -->
+        <Label Text="Hang tight, loading something cool..."
                TextColor="White"
-               FontSize="20"
+               FontSize="25"
+               FontFamily="DoctorGlitch"
                HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
