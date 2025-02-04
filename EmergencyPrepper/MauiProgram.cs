@@ -23,6 +23,7 @@ namespace EmergencyPrepper
                     fonts.AddFont("Colleged.ttf", "Colleged");
                     fonts.AddFont("DoctorGlitch.otf", "DoctorGlitch");
                     fonts.AddFont("Infected.ttf", "Infected");
+                    fonts.AddFont("Destruction.otf", "Destruction");
                 });
 
 #if DEBUG

@@ -3,80 +3,140 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="EmergencyPrepper.Views.MainPage"
-             Title="Emergency Prepper Tool by Philip Seisman">    
+             Title="Emergency Prepper Tool by Philip Seisman">
 
-    <ContentPage.Background>
-        <LinearGradientBrush>
-            <GradientStop Color="DarkSlateGray" Offset="0.0"/>
-            <GradientStop Color="Black" Offset="1.0"/>
-        </LinearGradientBrush>
-    </ContentPage.Background>
+    <AbsoluteLayout>
 
-    <Grid Padding="80" RowDefinitions="Auto, Auto, Auto, *" ColumnDefinitions="1.5*, 0.1*, 0.8*">
+        <!-- Background Image -->
+        <Image Source="mainbackground.png"
+               Opacity="0.95"
+               Aspect="AspectFill"
+               AbsoluteLayout.LayoutFlags="All"
+               AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
 
-        <!-- Main Title -->
-        <Label Text="EMERGENCY PREPPER"
-           TextColor="GreenYellow"
-           FontFamily="Colleged"
-           FontSize="50"
-           FontAttributes="Bold"
-           Grid.Row="0" Grid.Column="0"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"/>
+        <!-- Main Content -->
+        <Grid Padding="80" RowDefinitions="Auto, Auto, Auto, *" ColumnDefinitions="1.5*, 0.1*, 0.8*"
+              AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
-        <!-- Space between labels-->
-        <BoxView HeightRequest="40" Color="Transparent" Grid.Row="1" Grid.Column="0"/>
+            <!-- Main Title -->
+            <Label Text="EMERGENCY"
+                   TextColor="GreenYellow"
+                   FontFamily="Colleged"
+                   FontSize="70"
+                   FontAttributes="None"
+                   Grid.Row="0" Grid.Column="0"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
 
-        <!-- Subtitle -->
-        <Label Text="CHOOSE YOUR EMERGENCY:"
-           TextColor="White"
-           FontFamily="OpenSansRegular"
-           FontSize="20"
-           Grid.Row="1" Grid.Column="0"
-           HorizontalOptions="Center"/>
+            <Label Text="PREPPER"
+                   TextColor="GreenYellow"
+                   FontFamily="Colleged"
+                   FontSize="70"
+                   FontAttributes="None"
+                   Grid.Row="1" Grid.Column="0"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
 
-        <!-- Divider to the Left of "Badges Earned" -->
-        <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
-             WidthRequest="2"
-             Color="White"
-             Opacity="0.5"
-             VerticalOptions="FillAndExpand"
-             HorizontalOptions="Center"/>
+            <!-- Space between labels-->
+            <BoxView HeightRequest="80" Color="Transparent" Grid.Row="2" Grid.Column="0"/>
 
-        <!-- Earned Badges Section (Right Side) -->
-        <VerticalStackLayout Grid.Row="0" Grid.Column="2" Padding="10">
-            <Label Text="Badges Collected:" TextColor="GreenYellow" FontSize="40" FontAttributes="Bold" FontFamily="Infected" HorizontalOptions="Center"/>
+            <!-- Subtitle -->
+            <Label Text="CHOOSE YOUR EMERGENCY:"
+                   TextColor="White"
+                   FontFamily="OpenSansRegular"
+                   FontSize="20"
+                   Grid.Row="3" Grid.Column="0"
+                   HorizontalOptions="Center"/>
 
-            <!-- Spacing between Label and Button -->
-            <BoxView HeightRequest="20" Color="Transparent"/>
+            <!-- Divider to the Left of "Badges Earned" -->
+            <BoxView Grid.Row="0" Grid.RowSpan="10" Grid.Column="1"
+                     WidthRequest="2"
+                     Color="White"
+                     Opacity="0.5"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="Center"/>
 
-            <!-- Badges dynamically added here -->
-            <HorizontalStackLayout x:Name="BadgesContainer" Spacing="10">
+            <!-- Earned Badges Section (Right Side) -->
+            <VerticalStackLayout Grid.Row="0" Grid.Column="2" Padding="10">
+                <Label Text="Badges Collected:" TextColor="GreenYellow" FontSize="50" FontAttributes="None" FontFamily="Infected" HorizontalOptions="Center"/>
+
+                <!-- Spacing between Label and Button -->
+                <BoxView HeightRequest="20" Color="Transparent"/>
+
+                <!-- Badges dynamically added here -->
+                <HorizontalStackLayout x:Name="BadgesContainer" Spacing="10">
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Added a little more space between badges and biohazard button -->
+            <BoxView HeightRequest="50" Color="Transparent" Grid.Row="1" Grid.Column="0"/>
+
+            <!-- Emergency Picker and Prepare Button -->
+            <VerticalStackLayout Grid.Row="4" Grid.Column="0" 
+                                 HorizontalOptions="Center"
+                                 Margin="0,30,0,0">
+
+                <Picker x:Name="EmergencyPicker"
+                        SelectedIndexChanged="OnEmergencySelected"
+                        TextColor="White"
+                        BackgroundColor="DimGray"
+                        HeightRequest="30"
+                        WidthRequest="250"/>
+
+                <!-- Spacing between Picker and Button -->
+                <BoxView HeightRequest="15" Color="Transparent"/>
+
+                <!-- Prepare Button -->
+                <Button Text="PREPARE!"
+                        TextColor="White"
+                        FontFamily="OpenSans-Regular"
+                        BackgroundColor="Firebrick"
+                        Clicked="OnPrepareClicked"
+                        WidthRequest="120"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+
+            <!-- Social Media Links -->
+            <HorizontalStackLayout Grid.Row="3" Grid.Column="0" 
+                                   HorizontalOptions="Center" 
+                                   Padding="0"
+                                   Margin="0,300,0,0"
+                                   Spacing="10">                
+                
+                <!-- GitHub Link -->
+                <Button Clicked="OnGitHubClicked"
+                        BackgroundColor="Grey"
+                        WidthRequest="60"
+                        HeightRequest="60">
+                    <Button.ImageSource>
+                        <FileImageSource File="github.png"/>
+                    </Button.ImageSource>
+                </Button>
+
+                <!-- LinkedIn Link -->
+                <Button Clicked="OnLinkedInClicked"
+                        BackgroundColor="Transparent"
+                        WidthRequest="60"
+                        HeightRequest="60">
+                    <Button.ImageSource>
+                        <FileImageSource File="linkedin.png"/>
+                    </Button.ImageSource>
+                </Button>
+
+                <!-- Biohazard Info Icon -->
+                <Button Clicked="OnPageInfoClicked"
+                        BackgroundColor="Transparent"
+                        WidthRequest="60"
+                        HeightRequest="60">
+                    <Button.ImageSource>
+                        <FileImageSource File="biohazard.png"/>
+                    </Button.ImageSource>
+                </Button>
+
             </HorizontalStackLayout>
-        </VerticalStackLayout>
-
-        <!-- Emergency Picker -->
-        <VerticalStackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="Center">
-            <Picker x:Name="EmergencyPicker"
-                SelectedIndexChanged="OnEmergencySelected"
-                TextColor="White"
-                BackgroundColor="DimGray"
-                HeightRequest="20"
-                WidthRequest="250"/>
-
-            <!-- Spacing between Picker and Button -->
-            <BoxView HeightRequest="10" Color="Transparent"/>
-
-            <!-- Prepare Button -->
-            <Button Text="Prepare!"
-                TextColor="White"
-                FontFamily="OpenSans-Regular"
-                BackgroundColor="Firebrick"
-                Clicked="OnPrepareClicked"
-                WidthRequest="100"
-                HeightRequest="30"
-                HorizontalOptions="Center"/>
-        </VerticalStackLayout>
-
-    </Grid>
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>

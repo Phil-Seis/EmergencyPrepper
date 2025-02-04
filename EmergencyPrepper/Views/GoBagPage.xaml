@@ -18,9 +18,9 @@
 
             <Label x:Name="EmergencyLabel"
                    Text="Preparing for: "
-                   FontFamily="Darkmode"
+                   FontFamily="Destruction"
                    TextColor="Black"
-                   FontSize="48"
+                   FontSize="40"
                    HorizontalOptions="Center"/>
 
             <!-- Checklist -->
